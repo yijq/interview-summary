@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .middle-box{
+            display: table;
+            height: 300px;
+            border: 1px solid #f00;
+        }
+        .middle-inner{
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>css实现垂直居中</h2>
+    <div class="middle-box">
+        <div class="middle-inner">
+            <p>
+                <span class="suc-tip">
+                    这里是文字内容，这里是文字内容，这里是文字内容，这里是文字内容
+                </span> <br/>
+                <span class="suc-link">
+                    快捷入口：
+                    <a href="http://caibaojian.com">
+                        http://caibaojian.com
+                    </a>
+                </span>
+            </p>
+            <p style="display:none;">
+                <span class="suc-tip">
+                    这里是文字内容，这里是文字内容，这里是文字内容，这里是
+                </span>
+            </p>
+        </div>
+    </div>
+</body>
+<script>
+    //cookie test
+    document.cookie = "a=123";
+    document.cookie = "ivweb='this is ivweb'";
+    console.log(document.cookie);
+    const getCookieValue = () => document.cookie.replace(/(?:(?:^|.*;\s*)ivweb\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+    console.log(getCookieValue());
+</script>
+</html>
