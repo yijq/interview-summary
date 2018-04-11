@@ -1,5 +1,5 @@
 ## 面试总结
-这次在深圳面试了多家公司，主要是前端方面的，想就面试中遇到的问题进行一次总结，方便自己以后查阅，下面都是面试中比较常见的问题，答案是我自己总结的，如果有疏忽的地方，欢迎提issue。test文件夹中是对于一些问题的测试代码。PS: 还没写完，这几天会慢慢地完善。
+这次(2018/03 - 2018/04)在深圳面试了多家公司，主要是前端方面的，想就面试中遇到的问题进行一次总结，方便自己以后查阅，下面都是面试中比较常见的问题，答案是我自己总结的，如果有疏忽的地方，欢迎提issue。test文件夹中是对于一些问题的测试代码。PS: 还没写完，这几天会慢慢地完善。
 
 ### 1. 常见的排序算法
 程序员的面试肯定要考一些基本的算法的，虽然算法对于前端来说用到的地方比较少，但在面试中也时常遇到此类的题目。
@@ -23,7 +23,7 @@ function bubbleSort(arr){
 const quickSort = function(arr) {
     if(arr.length <= 1) return arr;
     let pivotIndex = Math.floor( arr.length / 2 );
-    let pivot = arr.splice(pivotIndex, 1)[0];//此处改变了数组
+    let pivot = arr.splice(pivotIndex, 1)[0];//此处改变了原数组
     let left = [];
     let right = [];
     for(let i = 0; i < arr.length; i++) {
@@ -115,7 +115,8 @@ const quickSort = function(arr) {
 .middle-inner{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
+    aligin-items: center;
 }
 
 ```
@@ -141,7 +142,7 @@ const quickSort = function(arr) {
 }
 
 ```
-参考：[css居中问题总结](https://www.v2ex.com/t/441154#reply0)
+参考：[css居中问题总结](https://www.v2ex.com/t/441154?r=ichiha#reply0)
 
 ### 4. AMD和CMD
 - AMD 是 RequireJS 在推广过程中对模块定义的规范化产出。
@@ -206,8 +207,63 @@ document.getElementsByTagName('html')[0].style.fontSize = window.innerWidth / 10
 参考：[再谈Retina下1px的解决方案](https://www.w3cplus.com/css/fix-1px-for-retina.html)
 
 ### 9. git常用命令
+git是比较常用的版本控制的工具，类似的还有svn，不过两者平时用的时候都差不多。如果git不是很熟，强烈建议花一段完整的时间看看这个[Git - book](https://git-scm.com/book/zh/v2)，最好跟着实际操作一下，大概一个下午就可以搞定。面试官一般是想了解你在之前的工作中对于版本控制和团队协作的一些经验，关于如何协作，是根据团队的组成和规模来确定的，并不是固定的。我之前的公司比较小，用的模式是，团队的每个成员都有一个自己的开发分支，还有一个总的开发分支develop，个人的开发分支完成一个功能后就合并到develop分支中，对于一些需要临时紧急修改的bug，可以开一个hotfix分支，用于正式发布的分支是master分支。
 
 ### 10. 闭包及其应用，构造函数和继承，原型
+闭包是函数和声明该函数的词法环境的组合。详细一点的说法，函数可以访问声明该函数的词法环境中的变量，并且还可以保证函数需要使用的变量不会被销毁。常见的应用有：
+```javascript
+//用闭包模拟私有方法
+var makeCounter = function() {
+  var privateCounter = 0;
+  function changeBy(val) {
+    privateCounter += val;
+  }
+  return {
+    increment: function() {
+      changeBy(1);
+    },
+    decrement: function() {
+      changeBy(-1);
+    },
+    value: function() {
+      return privateCounter;
+    }
+  }  
+};
+
+var Counter1 = makeCounter();
+var Counter2 = makeCounter();
+console.log(Counter1.value()); /* logs 0 */
+Counter1.increment();
+Counter1.increment();
+console.log(Counter1.value()); /* logs 2 */
+Counter1.decrement();
+console.log(Counter1.value()); /* logs 1 */
+console.log(Counter2.value()); /* logs 0 */
+
+//一个常见的错误：循环地为多个DOM元素绑定事件，结果只有最后的一个元素绑定上了，可以利用闭包来创建私有作用域来解决，也可以使用let关键字来解决。
+```
+详情参见：[闭包 MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures)  
+```javascript
+//构造函数
+function Cat(name, age, color) {
+    this.name = name;
+    this.age = age;
+    this.color = color;
+    this.sayHello = function() {
+        console.log('Wang wang!')
+    };
+}
+
+var myDog = new Cat('娘口三三', 1000, 'white');
+
+//关于new关键字执行时发生了什么（这个问题问得很多，JS高级程序设计 里面说的很清楚，建议去看看）
+/*
+new关键字执行时有4个步骤：
+1. 在内存中开辟一块新的空间
+*/
+```
+
 
 ### 11. flex布局和grid布局
 
