@@ -210,7 +210,8 @@ document.getElementsByTagName('html')[0].style.fontSize = window.innerWidth / 10
 git是比较常用的版本控制的工具，类似的还有svn，不过两者平时用的时候都差不多。如果git不是很熟，强烈建议花一段完整的时间看看这个[Git - book](https://git-scm.com/book/zh/v2)，最好跟着实际操作一下，大概一个下午就可以搞定。面试官一般是想了解你在之前的工作中对于版本控制和团队协作的一些经验，关于如何协作，是根据团队的组成和规模来确定的，并不是固定的。我之前的公司比较小，用的模式是，团队的每个成员都有一个自己的开发分支，还有一个总的开发分支develop，个人的开发分支完成一个功能后就合并到develop分支中，对于一些需要临时紧急修改的bug，可以开一个hotfix分支，用于正式发布的分支是master分支。
 
 ### 10. 闭包及其应用，构造函数和继承，原型
-闭包是函数和声明该函数的词法环境的组合。详细一点的说法，函数可以访问声明该函数的词法环境中的变量，并且还可以保证函数需要使用的变量不会被销毁。常见的应用有：
+- 闭包
+    闭包是函数和声明该函数的词法环境的组合。详细一点的说法，函数可以访问声明该函数的词法环境中的变量，并且还可以保证函数需要使用的变量不会被销毁。常见的应用有：
 ```javascript
 //用闭包模拟私有方法
 var makeCounter = function() {
@@ -244,6 +245,7 @@ console.log(Counter2.value()); /* logs 0 */
 //一个常见的错误：循环地为多个DOM元素绑定事件，结果只有最后的一个元素绑定上了，可以利用闭包来创建私有作用域来解决，也可以使用let关键字来解决。
 ```
 详情参见：[闭包 MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures)  
+- 构造函数
 ```javascript
 //构造函数
 function Cat(name, age, color) {
@@ -255,21 +257,75 @@ function Cat(name, age, color) {
     };
 }
 
-var myDog = new Cat('娘口三三', 1000, 'white');
+
+var myCat = new Cat('娘口三三', 1000, 'white');
 
 //关于new关键字执行时发生了什么（这个问题问得很多，JS高级程序设计 里面说的很清楚，建议去看看）
 /*
 new关键字执行时有4个步骤：
-1. 在内存中开辟一块新的空间
+1. 创建一个新对象
+2. 将构造函数的作用域赋给新对象（因此this就指向了这个新对象）
+3. 执行构造函数中的代码（为这个新对象添加属性）
+4. 返回新对象（如果函数中没有return关键字，就返回这个新对象；如果有新对象，就返回return后面的内容）
 */
 ```
 
+- 原型链与继承
+```javascript
+/*
+原型链
+JavaScript只有一种结构：对象。每个对象都有一个私有属性（称为 [[prototype]] ，挂载在 __prototype__ 属性上），它指向它的原型对象（prootype）。该prototype又有一个自己的protoype，层层向上直到一个对象的原型为null，根据定义，null没有原型，并作为这个原型链中的最后一个环节。
+*/
+
+/*
+基于原型链的继承
+JavaScript对象是动态的属性"包"（指其自己的属性），JavaScript有一个指向一个原型对象的链。当试图访问一个对象属性时，它不仅仅在该对象上搜寻，还会搜寻该对象的原型，以及原型的原型，依次层层向上搜索，直到找到一个名字匹配的属性或达到原型链的末端。
+*/
+
+// 让我们假设我们有一个对象 o, 其有自己的属性 a 和 b：
+// {a: 1, b: 2}
+// o 的 [[Prototype]] 有属性 b 和 c：
+// {b: 3, c: 4}
+// 最后, o.[[Prototype]].[[Prototype]] 是 null.
+// 这就是原型链的末尾，即 null，
+// 根据定义，null 没有[[Prototype]].
+// 综上，整个原型链如下: 
+// {a:1, b:2} ---> {b:3, c:4} ---> null
+
+console.log(o.a); // 1
+// a是o的自身属性吗？是的，该属性的值为1
+
+console.log(o.b); // 2
+// b是o的自身属性吗？是的，该属性的值为2
+// 原型上也有一个'b'属性,但是它不会被访问到.这种情况称为"属性遮蔽 (property shadowing)"
+
+console.log(o.c); // 4
+// c是o的自身属性吗？不是，那看看原型上有没有
+// c是o.[[Prototype]]的属性吗？是的，该属性的值为4
+
+console.log(o.d); // undefined
+// d是o的自身属性吗？不是,那看看原型上有没有
+// d是o.[[Prototype]]的属性吗？不是，那看看它的原型上有没有
+// o.[[Prototype]].[[Prototype]] 为 null，停止搜索
+// 没有d属性，返回undefined
+```
+参考: [MDN 原型与继承](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
+
 
 ### 11. flex布局和grid布局
+这两种比较新的布局方式面试时也问的比较多，其中flex问得最多。  
+CSS网格布局(grid布局)和弹性盒布局(flex布局)的主要区别在于弹性盒布局是为一维布局服务的（沿横向或纵向的），而网格布局是为二维布局服务的（同时沿着横向和纵向）。这两个规格有一些相同的特性。  
+具体得用法参考：[flex布局教程](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?^%$),  
+[grid布局教程](http://blog.jirengu.com/?p=990),
+[grid和flex MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Grid_Layout/Relationship_of_Grid_Layout)
 
 ### 12. 浏览器从url输入到渲染成页面经历了哪些过程
+这个问题大概有三分之一得面试官问到，我一般是想到什么说什么，比较考察计算机基础的，这里有一个特别详细的版本，可以看看，在脑海中有个印象就可以了：  
+[what-happens-when-zh_CN](https://github.com/skyline75489/what-happens-when-zh_CN)
 
 ### 13. HTML5的新特性
+这个几乎是一个烂大街的问题了，网上有很多人都总结了自己的答案，但都只是二手或以上的资料，看第一手的资料才能对知识有更好的理解，MDN文档献上：
+[HTML5 MDN](https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/HTML)
 
 ### 14. CSS3中的transition, animation
 
