@@ -1,7 +1,27 @@
 ## 面试总结
 这次(2018/03 - 2018/04)在深圳面试了多家公司，主要是前端方面的，想就面试中遇到的问题进行一次总结，方便自己以后查阅，下面都是面试中比较常见的问题，答案是我自己总结的，如果有疏忽的地方，欢迎提issue。test文件夹中是对于一些问题的测试代码。PS: 还没写完，这几天会慢慢地完善。
 
-### 1. 常见的排序算法
+### 目录
+1. [常见的排序算法](#常见的排序算法)
+2. [BFC的概念](#BFC的概念)
+3. [CSS实现多行文字居中](#CSS实现多行文字居中) 
+4. [AMD和CMD](#AMD和CMD)
+5. [import与export的用法](#import与export的用法)
+6. [rem适配](#rem适配)
+7. [前端开发在android和ios中常见的坑](#前端开发在android和ios中常见的坑)
+8. [前端页面中1px的问题](#前端页面中1px的问题)
+9. [git常用命令](#git常用命令)
+10. [闭包及其应用和构造函数和继承及原型](#闭包及其应用和构造函数和继承及原型)
+11. [flex布局和grid布局](#flex布局和grid布局)
+12. [浏览器从url输入到渲染成页面经历了哪些过程](#浏览器从url输入到渲染成页面经历了哪些过程)
+13. [HTML5的新特性](#HTML5的新特性)
+14. [CSS3中的transition和animation](#CSS3中的transition和animation)
+15. [对nodejs的理解](#对nodejs的理解)
+16. [react的生命周期及其优化](#react的生命周期及其优化)
+17. [flux架构的状态管理的原理及使用](#flux架构的状态管理的原理及使用)
+18. [vue的生命周期及父子组件传值](#vue的生命周期及父子组件传值)
+
+### 常见的排序算法
 程序员的面试肯定要考一些基本的算法的，虽然算法对于前端来说用到的地方比较少，但在面试中也时常遇到此类的题目。
 ```javascript
 //冒泡排序：比较相邻的两个值，较大的放在后面
@@ -44,7 +64,7 @@ const quickSort = function(arr) {
 
 ```
 
-### 2. BFC的概念
+### BFC的概念
 块格式化上下文(Block Formatting Context, BFC)是web页面可视化CSS渲染的一部分，是布局过程中生成块级盒子的区域，也是浮动元素与其他元素交互限定的区域，下列方式可以创建块格式化上下文：
 - 根元素或包含根元素的元素
 - 浮动元素（元素的 float 不是 none）
@@ -64,7 +84,7 @@ const quickSort = function(arr) {
 创建了块格式化上下文的元素中的所有内容都会被包含到该BFC中。
 块格式化上下文对浮动定位（参见 float）与清除浮动（参见 clear）都很重要。浮动定位和清除浮动时只会应用于同一个BFC内的元素。浮动不会影响其它BFC中元素的布局，而清除浮动只能清除同一BFC中在它前面的元素的浮动。外边距折叠（Margin collapsing）也只会发生在属于同一BFC的块级元素之间
 
-### 3. CSS实现多行文字居中
+### CSS实现多行文字居中
 这个题目经常被问到，如果之前没有了解，一时半会很难想出解决方法，这里提供几种解决方案
 ```html
 <div class="middle-box">
@@ -144,7 +164,7 @@ const quickSort = function(arr) {
 ```
 参考：[css居中问题总结](https://www.v2ex.com/t/441154?r=ichiha#reply0)
 
-### 4. AMD和CMD
+### AMD和CMD
 - AMD 是 RequireJS 在推广过程中对模块定义的规范化产出。
 - CMD 是 SeaJS 在推广过程中对模块定义的规范化产出。
 - 类似的还有 CommonJS Modules/2.0 规范，是 BravoJS 在推广过程中对模块定义的规范化产出。
@@ -177,7 +197,7 @@ define(['./a', './b'],function(a, b) {
 
 参考：https://github.com/seajs/seajs/issues/277 ， https://www.zhihu.com/question/20351507
 
-### 5. import, export, require, module.exports的用法
+### import与export的用法
 import与export主要用于前端开发中，仅少数浏览器实现。暂时可以通过webpack，babel转换器使用。require，exports和module.exports主要使用在nodejs中，符合CommonJs规范。
 - import : import语句用于导入由另一个模块导出的绑定。具体用法参见[import MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/import) ;
 
@@ -185,7 +205,7 @@ import与export主要用于前端开发中，仅少数浏览器实现。暂时�
 
 - require : 用于引入模块，通常用于nodejs中。
 
-### 6. rem适配
+### rem适配
 rem是根据根元素(html)的font-size来计算大小的，可以用来设置font-size,margin,padding,width,height等的大小，主要用于移动端的适配，原理是根据屏幕的大小来动态地设置根元素地字体大小，从而使不同大小地屏幕有不同大小地字体，常用地方法有：
 1. 利用css的media query(媒体查询)来动态地设置根元素地字体大小：
 ```css
@@ -198,18 +218,18 @@ rem是根据根元素(html)的font-size来计算大小的，可以用来设置fo
 document.getElementsByTagName('html')[0].style.fontSize = window.innerWidth / 10 + 'px';
 ```
 
-### 7. 前端开发在android和ios中常见的坑
+### 前端开发在android和ios中常见的坑
 这个需要较多的移动端开发经验才能有一定的总结，我遇到的不多，但这方面的问题也常常被问到，下面是这方面知识的参考
 [AlloyTeam移动端常见问题的解决](https://github.com/AlloyTeam/Mars/tree/master/issues)
 
-### 8. 前端页面中1px的问题
+### 前端页面中1px的问题
 前端中1px的问题是指，一直以来我们实现边框的方法都是设置 border: 1px solid #ccc，但是在retina屏上因为设备像素比的不同，边框在移动设备上的表现也不相同：1px可能会被渲染成1.5px, 2px, 2.5px, 3px....，在用户体验上略差，所以现在要解决的问题就是在retina屏幕实现1px边框。主要的解决方案是，window.devicePixelRatio（dpr）的值动态改变viewport的缩放。  
 参考：[再谈Retina下1px的解决方案](https://www.w3cplus.com/css/fix-1px-for-retina.html)
 
-### 9. git常用命令
+### git常用命令
 git是比较常用的版本控制的工具，类似的还有svn，不过两者平时用的时候都差不多。如果git不是很熟，强烈建议花一段完整的时间看看这个[Git - book](https://git-scm.com/book/zh/v2)，最好跟着实际操作一下，大概一个下午就可以搞定。  面试官一般是想了解你在之前的工作中对于版本控制和团队协作的一些经验，关于如何协作，是根据团队的组成和规模来确定的，并不是固定的。  我之前的公司比较小，用的模式是，团队的每个成员都有一个自己的开发分支，还有一个总的开发分支develop，个人的开发分支完成一个功能后就合并到develop分支中，对于一些需要临时紧急修改的bug，可以开一个hotfix分支，用于正式发布的分支是master分支。
 
-### 10. 闭包及其应用，构造函数和继承，原型
+### 闭包及其应用和构造函数和继承及原型
 - 闭包
     闭包是函数和声明该函数的词法环境的组合。详细一点的说法，函数可以访问声明该函数的词法环境中的变量，并且还可以保证函数需要使用的变量不会被销毁。常见的应用有：
 ```javascript
@@ -318,35 +338,35 @@ console.log(o.d); // undefined
 参考: [MDN 原型与继承](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
 
 
-### 11. flex布局和grid布局
+### flex布局和grid布局
 这两种比较新的布局方式面试时也问的比较多，其中flex问得最多。  
 CSS网格布局(grid布局)和弹性盒布局(flex布局)的主要区别在于弹性盒布局是为一维布局服务的（沿横向或纵向的），而网格布局是为二维布局服务的（同时沿着横向和纵向）。这两个规格有一些相同的特性。  
 具体得用法参考：[flex布局教程](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?^%$),  
 [grid布局教程](http://blog.jirengu.com/?p=990),
 [grid和flex MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Grid_Layout/Relationship_of_Grid_Layout)
 
-### 12. 浏览器从url输入到渲染成页面经历了哪些过程
+### 浏览器从url输入到渲染成页面经历了哪些过程
 这个问题大概有三分之一得面试官问到，我一般是想到什么说什么，比较考察计算机基础的，这里有一个特别详细的版本，可以看看，在脑海中有个印象就可以了：  
 [what-happens-when-zh_CN](https://github.com/skyline75489/what-happens-when-zh_CN)
 
-### 13. HTML5的新特性
+### HTML5的新特性
 这个几乎是一个烂大街的问题了，网上有很多人都总结了自己的答案，但都只是二手或以上的资料，看第一手的资料才能对知识有更好的理解，MDN文档献上：
 [HTML5 MDN](https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/HTML)
 
-### 14. CSS3中的transition, animation
+### CSS3中的transition和animation
 一般写css遇到记不清的属性都会去查查MDN文档，这次面试的时候，有面试管直接问我CSS3中的transition, animation这两个属性的参数是什么，我当然记得不清楚，谁染觉得这么问没什么必要，但还是注意一下比较好：
 - transition: property(属性名) | duration(持续时间) | timing-function(动画类型) | delay(延迟时间);  
 - animation: duration(持续时间) | timing-function(动画类型) | delay(延迟时间) | iteration-count(重复次数) | direction(方向) | fill-mode(填充模式) | play-state(动画的状态) | name(动画名称)
 
-### 15. 对nodejs的理解
+### 对nodejs的理解
 **Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。**  
 上面的是[nodejs中文官网](http://nodejs.cn/)的定义。简单点说：Nodejs就是将浏览器中的Chrome V8 引擎移植到操作系统中，增加了各种模块和必要的工具，使其能够在服务器端运行。
 
-### 16. react的生命周期及其优化
+### react的生命周期及其优化
 
-### 17. flux架构的状态管理的原理及使用
+### flux架构的状态管理的原理及使用
 
-### 18. vue的生命周期，双向数据绑定，父子组件传值
+### vue的生命周期及父子组件传值
 
 
 
