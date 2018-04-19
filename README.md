@@ -328,8 +328,13 @@ CSS网格布局(grid布局)和弹性盒布局(flex布局)的主要区别在于�
 [HTML5 MDN](https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/HTML)
 
 ### 14. CSS3中的transition, animation
+一般写css遇到记不清的属性都会去查查MDN文档，这次面试的时候，有面试管直接问我CSS3中的transition, animation这两个属性的参数是什么，我当然记得不清楚，谁染觉得这么问没什么必要，但还是注意一下比较好：
+- transition: property(属性名) | duration(持续时间) | timing-function(动画类型) | delay(延迟时间);  
+- animation: duration(持续时间) | timing-function(动画类型) | delay(延迟时间) | iteration-count(重复次数) | direction(方向) | fill-mode(填充模式) | play-state(动画的状态) | name(动画名称)
 
 ### 15. 对nodejs的理解
+**Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。**  
+上面的是[nodejs中文官网](http://nodejs.cn/)的定义。简单点说：Nodejs就是将浏览器中的Chrome V8 引擎移植到操作系统中，增加了各种模块和必要的工具，使其能够在服务器端运行。
 
 ### 16. react的生命周期及其优化
 
