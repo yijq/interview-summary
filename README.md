@@ -363,10 +363,63 @@ CSS网格布局(grid布局)和弹性盒布局(flex布局)的主要区别在于�
 上面的是[nodejs中文官网](http://nodejs.cn/)的定义。简单点说：Nodejs就是将浏览器中的Chrome V8 引擎移植到操作系统中，增加了各种模块和必要的工具，使其能够在服务器端运行。
 
 ### react的生命周期及其优化
+生命周期：  
+- 装载过程
+    - 组件第一次被渲染时调用
+    - constructor(props){}
+        - 初始化state
+        - 绑定成员函数的this环境
+    - getInitalState和getDefaultProps(ES6中已经不适用)
+    - componentWillMount(){}
+    - render(){}
+    - componentDidMount(){}
+- 更新过程
+    - 当porps或state被修改时调用
+    - componentWillReceiveProps(nextProps) {}
+        - 父组件中调用render()时调用,this.setState不会触发
+
+    - shouldComponentUpdate(nextProps,nextState) {}
+        - 返回一个bool值,决定是否渲染
+    - componentWillUpdate(nextProps,nextState) {}
+    - render()
+    - componentDidUpdate(prevProps, prevState) {}
+- 卸载过程
+    - componentWillUnmount() {}
+    - componentDidCatch(error, info) {}
+
+- tips:
+    - 组件可通过this.forceUpdate强行引发一次重新绘制  
+
+优化的方法：
+- 单个React组件的性能优化
+    - 原理:在shouldComponentUpdate(nextProps,nextState){}中来判断是否需要更新,同时也要避免给子组件传匿名对象或函数
+    - 可以使用react-redux中的connect的特性,将函数写在map函数中
+- 多个React组件的性能优化
+    - shouldComponentUpdate的使用
+    - key: 必须唯一,必须不变,不能用数组索引来作为key
+
+- 利用reselect提高数据选取的性能
+    - reselect可以用来比较是否改变来提高性能
+    - store的状态设计尽量范式化,类似关系型数据库
+
 
 ### flux架构的状态管理的原理及使用
+- 单向数据流
+- 步骤:
+  - 创建一个全局的dispatcher
+  - 创建动作类型actionType,为动作名称字符串
+  - 创建动作类型的生成器action,每个动作dispacth一个含有type和动作事件数据的对象
+  - 创建对应的store,用于存储数据,根据对应的动作类型更改状态,返回对应的状态,监听事件,移除事件
+  - 在组件中使用需要的action来修改store,引入需要的store用来监听改变
+- 优点:
+  -  单向数据流,容易控制
+- 缺点:
+  - store之间的依赖关系
+  - 难以进行服务端渲染
+  - store混杂了逻辑和状态
 
 ### vue的生命周期及父子组件传值
+vue我没有实际的用过，谁然被问到了，我就临时的看了一下文档准备了一下，大家也可以区看看[官方文档](https://cn.vuejs.org/index.html)
 
 
 
