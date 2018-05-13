@@ -1,5 +1,6 @@
 ## 面试总结
-这次(2018/03 - 2018/04)在深圳面试了多家公司，主要是前端方面的，想就面试中遇到的问题进行一次总结，方便自己以后查阅，下面都是面试中比较常见的问题，答案是我自己总结的，如果有疏忽的地方，欢迎提issue。test文件夹中是对于一些问题的测试代码。PS: 主要的问题写完了，剩下的一些具体的题目再逐步地更新。
+这次(2018/03 - 2018/04)在深圳面试了多家公司，主要是前端方面的，想就面试中遇到的问题进行一次总结，方便自己以后查阅，下面都是面试中比较常见的问题，答案是我自己总结的，如果有疏忽的地方，欢迎提issue。test文件夹中是对于一些问题的测试代码。PS: 主要的问题写完了，剩下的一些具体的题目再逐步地更新。  
+**面试不易，且行且珍惜。**
 
 ### 目录
 1. [常见的排序算法](#常见的排序算法)
@@ -346,7 +347,7 @@ CSS网格布局(grid布局)和弹性盒布局(flex布局)的主要区别在于�
 [grid和flex MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Grid_Layout/Relationship_of_Grid_Layout)
 
 ### 浏览器从url输入到渲染成页面经历了哪些过程
-这个问题大概有三分之一得面试官问到，我一般是想到什么说什么，比较考察计算机基础的，这里有一个特别详细的版本，可以看看，在脑海中有个印象就可以了：  
+这个问题大概有三分之一的面试官问到，我一般是想到什么说什么，比较考察计算机基础的，这里有一个特别详细的版本，可以看看，在脑海中有个印象就可以了：  
 [what-happens-when-zh_CN](https://github.com/skyline75489/what-happens-when-zh_CN)
 
 ### HTML5的新特性
@@ -354,7 +355,7 @@ CSS网格布局(grid布局)和弹性盒布局(flex布局)的主要区别在于�
 [HTML5 MDN](https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/HTML)
 
 ### CSS3中的transition和animation
-一般写css遇到记不清的属性都会去查查MDN文档，这次面试的时候，有面试管直接问我CSS3中的transition, animation这两个属性的参数是什么，我当然记得不清楚，谁染觉得这么问没什么必要，但还是注意一下比较好：
+一般写css遇到记不清的属性都会去查查MDN文档，这次面试的时候，有面试管直接问我CSS3中的transition, animation这两个属性的参数是什么，我当然记得不清楚，虽然觉得这么问没什么必要，但还是注意一下比较好：
 - transition: property(属性名) | duration(持续时间) | timing-function(动画类型) | delay(延迟时间);  
 - animation: duration(持续时间) | timing-function(动画类型) | delay(延迟时间) | iteration-count(重复次数) | direction(方向) | fill-mode(填充模式) | play-state(动画的状态) | name(动画名称)
 
@@ -419,7 +420,7 @@ CSS网格布局(grid布局)和弹性盒布局(flex布局)的主要区别在于�
   - store混杂了逻辑和状态
 
 ### vue的生命周期及父子组件传值
-vue我没有实际的用过，谁然被问到了，我就临时的看了一下文档准备了一下，大家也可以区看看[官方文档](https://cn.vuejs.org/index.html)
+vue我没有实际的用过，虽然被问到了，我就临时的看了一下文档准备了一下，大家也可以粗略地看看[官方文档](https://cn.vuejs.org/index.html)
 
 
 
